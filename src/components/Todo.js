@@ -6,6 +6,7 @@ class Todo extends Component {
         return (
             <div>
                 <Header />
+                todo
             </div>
         )
     }

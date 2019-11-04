@@ -5,6 +5,7 @@ class Done extends Component {
         return (
             <div>
                 <Header />
+                done
             </div>
         )
     }
