@@ -20,14 +20,14 @@ class Form extends Component {
         this.props.createTask(todos);
     }
     render() {
-        console.log(this.props);
+        const { todo } = this.state;
 
         return (
             <div>
                 <form>
                     <label>To do:</label>
-                    <input type='text' name='todo' onChange={e => this.onChange(e)} value={this.state.title}></input>
-                    <button type='submit'>Submit</button>
+                    <input type='text' name='todo' onChange={this.onChange} value={todo}></input>
+                    <button type='submit' onSubmit={this.onSubmit}>Submit</button>
                 </form>
             </div>
         )

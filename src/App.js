@@ -1,25 +1,17 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Page from './components/Page';
-import { AppToDo } from './components/Todo';
-import Done from './components/Done';
-
+import { store } from './store'
+import { Provider } from 'react-redux'
+import Routes from './components/Routes';
 
 class App extends Component {
 
 
   render() {
     return (
-      <div>
-        <Router>
-          <Switch>
-            <Route exact path="/" component={Page} />
-            <Route path="/AppToDo" component={AppToDo} />
-            <Route path="/done" component={Done} />
-          </Switch>
-        </Router>
-      </div>
+      <Provider store={store}>
+        <Routes />
+      </Provider>
     )
   }
 }

@@ -11,7 +11,7 @@ const initState = [
 
 export const list = (state = initState, action) => {
     switch (action.type) {
-        case 'ADD_POST':
+        case 'DIS_POST':
             return [
                 ...state
             ]
