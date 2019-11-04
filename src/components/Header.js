@@ -7,6 +7,7 @@ class Header extends Component {
         return (
             <div>
                 <ul>
+                    <NavLink to='/'><li>add</li></NavLink>
                     <NavLink to='/todo'> <li>still to do</li></NavLink>
                     <NavLink to='/done'> <li>already done</li></NavLink>
                 </ul>
