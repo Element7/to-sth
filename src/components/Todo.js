@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header'
 import { connect } from "react-redux";
-import { disPost } from "../actions";
+import { showList } from "../actions";
 
 class Todo extends Component {
     render() {
@@ -25,8 +25,8 @@ const mapStateToProps = (state) => {
         list: state.list
     }
 };
-const mapDispatchToProps = { disPost };
+const mapDispatchToProps = { showList };
 
-export const AppToDo = connect(mapStateToProps, mapDispatchToProps)(Todo);
+export const list = connect(mapStateToProps, mapDispatchToProps)(Todo);
 
 

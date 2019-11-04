@@ -1,5 +1,5 @@
-export const disPost = (list) => ({
-    type: 'DIS_POST',
+export const showList = (list) => ({
+    type: 'SHOW_CURRENT_LIST',
     list
 });
 

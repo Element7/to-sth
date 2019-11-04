@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import Header from './Header'
+import React, { Component } from 'react';
+import Header from './Header';
+
 class Done extends Component {
     render() {
         return (

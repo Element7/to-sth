@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Page from './Page';
-import { AppToDo } from './Todo';
+import { list } from './Todo';
 import Done from './Done';
 class Routes extends Component {
     render() {
@@ -10,7 +10,7 @@ class Routes extends Component {
                 <Router>
                     <Switch>
                         <Route exact path="/" component={Page} />
-                        <Route path="/apptodo" component={AppToDo} />
+                        <Route path="/list" component={list} />
                         <Route path="/done" component={Done} />
                     </Switch>
                 </Router>

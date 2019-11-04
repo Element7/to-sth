@@ -4,29 +4,28 @@ class Form extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            todo: '',
+            task: '',
         }
     }
 
     onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     }
+
     onSubmit(e) {
         e.preventDefault();
-        const todos = {
-            todo: this.state.todo,
+        const taskItem = {
+            task: this.state.task,
         };
-
-        this.props.createTask(todos);
+        this.props.createTask(taskItem);
     }
     render() {
-        const { todo } = this.state;
-
+        const { task } = this.state;
         return (
             <div>
                 <form>
                     <label>To do:</label>
-                    <input type='text' name='todo' onChange={this.onChange} value={todo}></input>
+                    <input type='text' name='task' onChange={this.onChange} value={task}></input>
                     <button type='submit' onSubmit={this.onSubmit}>Submit</button>
                 </form>
             </div>
