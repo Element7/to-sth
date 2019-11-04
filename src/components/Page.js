@@ -1,6 +1,7 @@
 import Header from './Header';
 import Form from './Form';
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+
 
 export default class Page extends Component {
     render() {
@@ -12,3 +13,6 @@ export default class Page extends Component {
         )
     }
 }
+
+
+

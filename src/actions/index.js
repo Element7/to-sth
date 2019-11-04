@@ -1,4 +1,6 @@
-export const listFetched = (list) => ({
-    type: 'FETCH_LIST_SUCCESS',
+export const addPost = (list) => ({
+    type: 'ADD_POST',
     list
 });
+
+

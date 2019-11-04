@@ -1,8 +1,19 @@
-export const list = (state = [], action) => {
-    switch (action.type) { // (2)
-        case 'FETCH_LIST_SUCCESS':
+const initState = [
+    {
+        id: '1',
+        todo: 'eating'
+    },
+    {
+        id: '2',
+        todo: 'cleaning'
+    }
+]
+
+export const list = (state = initState, action) => {
+    switch (action.type) {
+        case 'ADD_POST':
             return [
-                ...action.list
+                ...state
             ]
         default:
             return state
