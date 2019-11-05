@@ -1,15 +1,14 @@
-import Header from './Header';
 import Form from './Form';
 import React, { Component } from 'react';
+import { Container } from '@material-ui/core'
 
 
 export default class Page extends Component {
     render() {
         return (
-            <div>
-                <Header />
+            <Container>
                 <Form />
-            </div>
+            </Container>
         )
     }
 }

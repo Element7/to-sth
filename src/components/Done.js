@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import Header from './Header';
+import { Container } from '@material-ui/core'
 
 class Done extends Component {
     render() {
         return (
-            <div>
-                <Header />
+            <Container>
                 done
-            </div>
+            </Container>
         )
     }
 }

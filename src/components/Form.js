@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { showList } from '../actions'
+import { showList } from '../actions';
+import { Button, Typography, TextField, Container, FormControl } from '@material-ui/core';
+
+const formStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'columns',
+    marginTop: '100px'
+}
+
 
 class Form extends Component {
     constructor(props) {
@@ -15,6 +25,8 @@ class Form extends Component {
     }
 
     onSubmit = (e) => {
+        console.log('asdasd');
+
         e.preventDefault();
         const taskItem = {
             task: this.state.task,
@@ -24,24 +36,26 @@ class Form extends Component {
     render() {
         const { task } = this.state;
         return (
-            <div>
-                <form onSubmit={this.onSubmit}>
-                    <label>To do:</label>
-                    <input type='text' name='task' onChange={this.onChange} value={task}></input>
-                    <button type='submit'>Submit</button>
-                </form>
-            </div>
+            <Container>
+                <FormControl style={formStyle} >
+                    <Typography variant='h5'>Create new task</Typography>
+                    <TextField type='text' name='task' onChange={this.onChange} value={task}></TextField>
+                    <br />
+                    <Button onClick={this.onSubmit} color='primary' variant='contained'>Submit</Button>
+                </FormControl>
+            </Container >
+
         )
     }
 }
 
-const mapState = ({ list }) => ({
+const mapStateToProps = ({ list }) => ({
     list
 });
 
-const mapDispatch = dispatch => ({
+const mapDispatchToProps = dispatch => ({
     add: (list) => dispatch(showList(list))
 })
 
 
-export default connect(mapState, mapDispatch)(Form);
+export default connect(mapStateToProps, mapDispatchToProps)(Form);

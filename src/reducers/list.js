@@ -1,4 +1,5 @@
-import { SHOW_CURRENT_LIST } from '../actions'
+import { ADD_TASK } from '../actions';
+
 
 const initState = [
     {
@@ -11,11 +12,12 @@ const initState = [
 
 export const list = (state = initState, action) => {
     switch (action.type) {
-        case SHOW_CURRENT_LIST:
+        case ADD_TASK:
             return [
                 ...state,
                 {
-                    todo: action.list.task
+                    todo: action.list.task,
+                    id: new Date().getTime()
                 }
             ]
         default:
