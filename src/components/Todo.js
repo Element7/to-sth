@@ -14,15 +14,18 @@ const ListItemStyle = {
 
 
 class Todo extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isFiltered: false
+        }
+    }
 
     handleClear = e => {
-
-
-
+        this.setState({
+            isFiltered: true
+        })
         this.props.filter(this.props.list)
-
-
-
     }
     render() {
         const handleBtns = <div>
@@ -31,9 +34,8 @@ class Todo extends Component {
         </div>
 
         const todoList = this.props.list.map(item => {
-            return (<>
+            return (
                 <ListItem style={ListItemStyle} divider={true} key={item.todo}>{item.todo}{handleBtns}</ListItem>
-            </>
             )
         })
         return (
@@ -44,17 +46,16 @@ class Todo extends Component {
     }
 }
 
-
-
 const mapStateToProps = (state) => {
+    console.log(state);
+
     return {
         list: state.list,
-        filterList: state.filterList
     }
 };
 const mapDispatchToProps = dispatch => ({
-    add: (list) => dispatch(showList(list)),
-    filter: (list) => dispatch(filterList(list))
+    filter: (list) => dispatch(filterList(list)),
+    add: (list) => dispatch(showList(list))
 })
 
 export const list = connect(mapStateToProps, mapDispatchToProps)(Todo);

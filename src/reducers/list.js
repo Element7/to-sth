@@ -1,12 +1,14 @@
 import { ADD_TASK } from '../actions';
-
+let idState = 2
 
 const initState = [
     {
-        todo: 'eating'
+        todo: 'eat',
+        id: 1
     },
     {
-        todo: 'cleaning'
+        todo: 'cleaning',
+        id: 2
     }
 ]
 
@@ -17,7 +19,7 @@ export const list = (state = initState, action) => {
                 ...state,
                 {
                     todo: action.list.task,
-                    id: new Date().getTime()
+                    id: ++idState
                 }
             ]
         default:

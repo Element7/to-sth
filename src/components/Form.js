@@ -25,7 +25,7 @@ class Form extends Component {
     }
 
     onSubmit = (e) => {
-        console.log('asdasd');
+
 
         e.preventDefault();
         const taskItem = {
