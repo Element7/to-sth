@@ -1,19 +1,22 @@
+import { SHOW_CURRENT_LIST } from '../actions'
+
 const initState = [
     {
-        id: '1',
         todo: 'eating'
     },
     {
-        id: '2',
         todo: 'cleaning'
     }
 ]
 
 export const list = (state = initState, action) => {
     switch (action.type) {
-        case 'SHOW_CURRENT_LIST':
+        case SHOW_CURRENT_LIST:
             return [
-                ...state
+                ...state,
+                {
+                    todo: action.list.task
+                }
             ]
         default:
             return state

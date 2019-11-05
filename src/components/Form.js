@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { showList } from '../actions'
 
 class Form extends Component {
     constructor(props) {
@@ -12,26 +14,34 @@ class Form extends Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    onSubmit(e) {
+    onSubmit = (e) => {
         e.preventDefault();
         const taskItem = {
             task: this.state.task,
         };
-        this.props.createTask(taskItem);
+        this.props.add(taskItem);
     }
     render() {
         const { task } = this.state;
         return (
             <div>
-                <form>
+                <form onSubmit={this.onSubmit}>
                     <label>To do:</label>
                     <input type='text' name='task' onChange={this.onChange} value={task}></input>
-                    <button type='submit' onSubmit={this.onSubmit}>Submit</button>
+                    <button type='submit'>Submit</button>
                 </form>
             </div>
         )
     }
 }
 
+const mapState = ({ list }) => ({
+    list
+});
 
-export default Form;
+const mapDispatch = dispatch => ({
+    add: (list) => dispatch(showList(list))
+})
+
+
+export default connect(mapState, mapDispatch)(Form);

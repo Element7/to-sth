@@ -7,7 +7,7 @@ class Todo extends Component {
     render() {
         const todoList = this.props.list.map(item => {
             return (
-                <li key={item.id}>{item.todo}</li>
+                <li key={item.todo}>{item.todo}</li>
             )
 
         })
