@@ -21,34 +21,38 @@ class Todo extends Component {
         }
     }
 
-    handleClear = e => {
+    handleClear = id => e => {
         this.setState({
             isFiltered: true
         })
-        this.props.filter(this.props.list)
+        this.props.filter(this.props.list, id) // do metody usun przekaz id
     }
-    render() {
-        const handleBtns = <div>
-            <Button><CheckIcon /></Button>
-            <Button onClick={this.handleClear}><ClearIcon /></Button>
-        </div>
+    handleBtns = id => <div>
+        <Button><CheckIcon /></Button>
+        <Button onClick={this.handleClear(id)}><ClearIcon /></Button>
+    </div>
 
-        const todoList = this.props.list.map(item => {
-            return (
-                <ListItem style={ListItemStyle} divider={true} key={item.todo}>{item.todo}{handleBtns}</ListItem>
-            )
-        })
+    renderList = (e) => {
+        return (
+            this.props.list.map(item => {
+                return (
+                    <ListItem style={ListItemStyle} divider={true} key={item.id}>{item.todo}{this.handleBtns(item.id)}</ListItem>
+                )
+            })
+        )
+    }
+
+    render() {
+
         return (
             <Container>
-                <List >{todoList}</List>
+                <List >{this.renderList()}</List>
             </Container>
         )
     }
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
-
     return {
         list: state.list,
     }
