@@ -20,9 +20,9 @@ class Form extends Component {
     }
 
     onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
+        const { name, value } = e.target
+        this.setState({ [name]: value });
     }
-
     onSubmit = (e) => {
 
 
@@ -34,6 +34,7 @@ class Form extends Component {
     }
     render() {
         const { task } = this.state;
+
         return (
             <Container>
                 <FormControl style={formStyle} >
