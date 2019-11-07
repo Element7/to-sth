@@ -9,12 +9,13 @@ const formStyle = {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'columns',
-    marginBottom: '100px'
+    marginBottom: '50px'
 }
 
 const paperStyle = {
-    paddingTop: '60px',
-    paddingBottom: '1px'
+    paddingTop: '50px',
+    paddingBottom: '1px',
+    marginBottom: '50px'
 
 }
 
@@ -23,7 +24,8 @@ class Form extends Component {
         super(props);
         this.state = {
             text: '',
-            date: ''
+            date: '',
+            description: ''
         }
     }
 
@@ -37,7 +39,8 @@ class Form extends Component {
         e.preventDefault();
         const textItem = {
             text: this.state.text,
-            date: this.state.date
+            date: this.state.date,
+            description: this.state.description,
         };
         this.props.addTask(textItem);
     }
@@ -52,13 +55,13 @@ class Form extends Component {
             <Container>
                 <Paper style={paperStyle}>
                     <FormControl style={formStyle} >
-                        <Typography variant='h5'>Create new text</Typography>
+                        <Typography variant='h5'>Create new task</Typography>
                         <div style={{
                             display: 'flex',
                             justifyContent: 'space-between',
                             alignItems: 'center',
                             width: '35rem',
-                            marginTop: '50px',
+                            marginTop: '30px',
 
                         }}>
                             <TextField
@@ -78,15 +81,14 @@ class Form extends Component {
                             label="Description"
                             style={{ margin: 8, width: '35rem' }}
                             placeholder="Type text description"
-
                             margin="normal"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
+                            InputLabelProps={{ shrink: true, }}
                             variant="outlined"
+                            onChange={this.onChange}
+                            name='description'
                         />
                         <br />
-                        <Button onClick={this.onSubmit} color='primary' variant='contained'>Submit</Button>
+                        <Button onClick={this.onSubmit} color='primary' variant='contained' size='large' style={{ marginTop: '20px' }}>Submit</Button>
                     </FormControl>
                 </Paper>
             </ Container >

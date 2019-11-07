@@ -4,12 +4,14 @@ const initState = [
     {
         taskTitle: 'Learn',
         id: new Date().getTime(),
-        date: new Date()
+        date: new Date(),
+        description: 'You know nothing John S'
     },
     {
         taskTitle: 'Keep learning',
         id: new Date().getTime() + 1,
-        date: new Date()
+        date: new Date(),
+        description: 'Try hard'
     }
 ]
 
@@ -21,7 +23,8 @@ export const list = (state = initState, action) => {
                 {
                     taskTitle: action.taskItem.text,
                     id: new Date().getTime(),
-                    date: action.taskItem.date
+                    date: action.taskItem.date,
+                    description: action.taskItem.description
                 },
             ];
         case DELETE_TASK:
