@@ -19,7 +19,8 @@ const styles = () => ({
     menulist: {
         display: 'flex',
         margin: '0 auto',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        outline: 'none'
     },
     fullWidth: {
         width: '100%'
@@ -56,11 +57,7 @@ class Header extends Component {
                              </MenuItem>
                 </MenuList>
             </Box>
-
-
         </ >
-
-
         )
     }
 }

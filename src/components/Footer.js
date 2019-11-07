@@ -6,9 +6,9 @@ import Link from '@material-ui/core/Link';
 
 function Copyright() {
     return (
-        <Typography variant="body2" color="textSecondary" align="center">
+        <Typography variant="body2" color="inherit" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
+            <Link color="inherit" underline='none' href="https://material-ui.com/">
                 Your Website
       </Link>{' '}
             {new Date().getFullYear()}
@@ -19,14 +19,13 @@ function Copyright() {
 
 const useStyles = makeStyles(theme => ({
     root: {
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: '100vh',
+        width: '100%',
     },
     footer: {
         padding: theme.spacing(2),
         marginTop: 'auto',
-        backgroundColor: 'white',
+        backgroundColor: '#4258B5',
+        color: 'white'
     },
 }));
 
@@ -36,7 +35,7 @@ export default function StickyFooter() {
     return (
         <div className={classes.root}>
             <footer className={classes.footer}>
-                <Container maxWidth="sm" color='primary'>
+                <Container maxWidth="sm">
                     <Copyright />
                 </Container>
             </footer>

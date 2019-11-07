@@ -1,18 +1,16 @@
 import Form from './Form';
 import React, { Component } from 'react';
 import { Container } from '@material-ui/core'
-import Footer from './Footer'
+
 
 export default class Page extends Component {
     render() {
         return (
-            <Container>
+            <Container style={{ flexGrow: '10', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Form />
-                <Footer></Footer>
             </Container>
         )
     }
 }
-
 
 

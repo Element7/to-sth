@@ -1,14 +1,14 @@
-import { ADD_TASK, FILTER_LIST } from '../actions';
+import { ADD_TASK, DELETE_TASK } from '../actions';
 
 
 const initState = [
     {
         todo: 'eat',
-        id: '10afc8c7-ce3c-4501-a741-145148ca3b8b'
+        id: new Date().getTime()
     },
     {
         todo: 'cleaning',
-        id: '8dc918a4-b3ff-4091-bd17-1fb00ce65a0d'
+        id: new Date().getTime() + 1
     }
 ]
 
@@ -20,14 +20,19 @@ export const list = (state = initState, action) => {
             return [
                 ...state,
                 {
-                    todo: action.list.task,
-                    id: '8eaeadf1-f7e8-4340-ab60-9222b4be5910'
+                    todo: action.text.task,
+                    id: new Date().getTime()
                 },
-            ]
-        case FILTER_LIST:
-            console.log(action);
-            return action.list.filter(item => item.todo.length > 5);
+            ];
+        case DELETE_TASK:
+            const copy = [...state];
+            const index = copy.findIndex(item => item.id === action.id);
+            return [
+                ...copy.slice(0, index),
+                ...copy.slice(index + 1)
+            ];
         default:
-            return state
+            return state;
     }
 }
+

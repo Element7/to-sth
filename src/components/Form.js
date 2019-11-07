@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { showList } from '../actions';
+import { addTask } from '../actions';
 import { Button, Typography, TextField, Container, FormControl } from '@material-ui/core';
 
 const formStyle = {
@@ -8,7 +8,6 @@ const formStyle = {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'columns',
-    marginTop: '100px'
 }
 
 
@@ -31,7 +30,7 @@ class Form extends Component {
         const taskItem = {
             task: this.state.task,
         };
-        this.props.add(taskItem);
+        this.props.addTask(taskItem);
     }
     render() {
         const { task } = this.state;
@@ -43,7 +42,7 @@ class Form extends Component {
                     <br />
                     <Button onClick={this.onSubmit} color='primary' variant='contained'>Submit</Button>
                 </FormControl>
-            </Container >
+            </ Container >
 
         )
     }
@@ -53,9 +52,9 @@ const mapStateToProps = ({ list }) => ({
     list
 });
 
-const mapDispatchToProps = dispatch => ({
-    add: (list) => dispatch(showList(list))
-})
+const mapDispatchToProps = {
+    addTask
+}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
