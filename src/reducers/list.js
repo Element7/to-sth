@@ -1,18 +1,17 @@
 import { ADD_TASK, DELETE_TASK } from '../actions';
 
-
 const initState = [
     {
-        todo: 'eat',
-        id: new Date().getTime()
+        taskTitle: 'Learn',
+        id: new Date().getTime(),
+        date: new Date()
     },
     {
-        todo: 'cleaning',
-        id: new Date().getTime() + 1
+        taskTitle: 'Keep learning',
+        id: new Date().getTime() + 1,
+        date: new Date()
     }
 ]
-
-
 
 export const list = (state = initState, action) => {
     switch (action.type) {
@@ -20,8 +19,9 @@ export const list = (state = initState, action) => {
             return [
                 ...state,
                 {
-                    todo: action.text.task,
-                    id: new Date().getTime()
+                    taskTitle: action.taskItem.text,
+                    id: new Date().getTime(),
+                    date: action.taskItem.date
                 },
             ];
         case DELETE_TASK:

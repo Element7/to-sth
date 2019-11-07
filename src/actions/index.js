@@ -1,9 +1,10 @@
-export const ADD_TASK = '[text] add new task to the list';
+export const ADD_TASK = '[taskItem] add new task to the list';
 export const DELETE_TASK = '[id] delete task from list';
 
-export const addTask = (text) => ({
+
+export const addTask = (taskItem) => ({
     type: ADD_TASK,
-    text
+    taskItem
 });
 
 export const deleteTask = (id) => ({

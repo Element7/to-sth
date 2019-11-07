@@ -4,16 +4,23 @@ import { deleteTask } from "../actions";
 import ClearIcon from '@material-ui/icons/Clear';
 import { Container, List, ListItem, Button } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
-
+import Paper from '@material-ui/core/Paper';
 
 const ListItemStyle = {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    position: 'relative',
+    marginTop: '10px'
+
+}
+
+const divStyle = {
+    display: 'flex',
+    flexDirection: 'column'
 }
 
 
 class Todo extends Component {
-
     handleClear = id => e => {
         this.setState({
             isFiltered: true
@@ -34,8 +41,8 @@ class Todo extends Component {
                         key={item.id}
                         style={ListItemStyle}
                         divider
-                    >
-                        {item.todo}{this.renderBtns(item.id)}
+                    ><div style={divStyle}><span>{item.date.getMonth()}/{item.date.getDate()}/{item.date.getFullYear()}</span>
+                            <span style={{ fontSize: '1.2rem', fontWeight: '500' }}>{item.taskTitle}</span></div>{this.renderBtns(item.id)}
                     </ListItem>
                 )
             })
@@ -45,7 +52,9 @@ class Todo extends Component {
     render() {
         return (
             <Container style={{ flexGrow: '10', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <List style={{ width: '40rem' }} >{this.renderList()}</List>
+                <Paper style={{ width: '60%', marginBottom: '100px' }}>
+                    <List style={{ padding: '0' }}>{this.renderList()}</List>
+                </Paper>
             </Container>
         )
     }
