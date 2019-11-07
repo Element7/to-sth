@@ -1,21 +1,38 @@
+import { ADD_TASK, DELETE_TASK } from '../actions';
+
+
 const initState = [
     {
-        id: '1',
-        todo: 'eating'
+        todo: 'eat',
+        id: new Date().getTime()
     },
     {
-        id: '2',
-        todo: 'cleaning'
+        todo: 'cleaning',
+        id: new Date().getTime() + 1
     }
 ]
 
+
+
 export const list = (state = initState, action) => {
     switch (action.type) {
-        case 'SHOW_CURRENT_LIST':
+        case ADD_TASK:
             return [
-                ...state
-            ]
+                ...state,
+                {
+                    todo: action.text.task,
+                    id: new Date().getTime()
+                },
+            ];
+        case DELETE_TASK:
+            const copy = [...state];
+            const index = copy.findIndex(item => item.id === action.id);
+            return [
+                ...copy.slice(0, index),
+                ...copy.slice(index + 1)
+            ];
         default:
-            return state
+            return state;
     }
 }
+

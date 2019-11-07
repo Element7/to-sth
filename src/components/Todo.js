@@ -1,31 +1,65 @@
 import React, { Component } from 'react';
-import Header from './Header'
 import { connect } from "react-redux";
-import { showList } from "../actions";
+import { deleteTask } from "../actions";
+import ClearIcon from '@material-ui/icons/Clear';
+import { Container, List, ListItem, Button } from '@material-ui/core';
+import CheckIcon from '@material-ui/icons/Check';
+
+
+const ListItemStyle = {
+    display: 'flex',
+    justifyContent: 'space-between'
+}
+
 
 class Todo extends Component {
-    render() {
-        const todoList = this.props.list.map(item => {
-            return (
-                <li key={item.id}>{item.todo}</li>
-            )
 
-        })
+    handleClear = id => e => {
+        this.setState({
+            isFiltered: true
+        });
+        this.props.deleteTask(id)
+    }
+
+    renderBtns = id => <div>
+        <Button><CheckIcon /></Button>
+        <Button onClick={this.handleClear(id)}><ClearIcon /></Button>
+    </div>
+
+    renderList = () => {
         return (
-            <div>
-                <Header />
-                <ul>{todoList}</ul>
-            </div>
+            this.props.list.map(item => {
+                return (
+                    <ListItem
+                        key={item.id}
+                        style={ListItemStyle}
+                        divider
+                    >
+                        {item.todo}{this.renderBtns(item.id)}
+                    </ListItem>
+                )
+            })
+        )
+    }
+
+    render() {
+        return (
+            <Container style={{ flexGrow: '10', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <List style={{ width: '40rem' }} >{this.renderList()}</List>
+            </Container>
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        list: state.list
+        list: state.list,
     }
 };
-const mapDispatchToProps = { showList };
+
+const mapDispatchToProps = {
+    deleteTask
+}
 
 export const list = connect(mapStateToProps, mapDispatchToProps)(Todo);
 
