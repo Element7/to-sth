@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { deleteTask } from "../actions";
+import { deleteTask, completeTask } from "../actions";
 import ClearIcon from '@material-ui/icons/Clear';
 import { Container, List, ListItem, Button } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
@@ -22,14 +22,17 @@ const divStyle = {
 
 class Todo extends Component {
     handleClear = id => e => {
-        this.setState({
-            isFiltered: true
-        });
         this.props.deleteTask(id)
     }
 
+    handleCompleteBtn = id => e => {
+        console.log('asf');
+
+        this.props.completeTask(id)
+    }
+
     renderBtns = id => <div>
-        <Button><CheckIcon /></Button>
+        <Button onClick={this.handleCompleteBtn(id)}><CheckIcon /></Button>
         <Button onClick={this.handleClear(id)}><ClearIcon /></Button>
     </div>
 
@@ -67,7 +70,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    deleteTask
+    deleteTask,
+    completeTask
 }
 
 export const list = connect(mapStateToProps, mapDispatchToProps)(Todo);

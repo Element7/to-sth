@@ -1,5 +1,6 @@
 export const ADD_TASK = '[taskItem] add new task to the list';
 export const DELETE_TASK = '[id] delete task from list';
+export const COMPLETE_TASK = '[id] move the task to complete section';
 
 
 export const addTask = (taskItem) => ({
@@ -13,4 +14,7 @@ export const deleteTask = (id) => ({
 })
 
 
-
+export const completeTask = (id) => ({
+    type: COMPLETE_TASK,
+    id
+})

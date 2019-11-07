@@ -1,4 +1,4 @@
-import { ADD_TASK, DELETE_TASK } from '../actions';
+import { ADD_TASK, DELETE_TASK, COMPLETE_TASK } from '../actions';
 
 const initState = [
     {
@@ -34,6 +34,8 @@ export const list = (state = initState, action) => {
                 ...copy.slice(0, index),
                 ...copy.slice(index + 1)
             ];
+        case COMPLETE_TASK:
+            return state
         default:
             return state;
     }

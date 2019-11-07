@@ -43,6 +43,12 @@ class Form extends Component {
             description: this.state.description,
         };
         this.props.addTask(textItem);
+        this.setState({
+            text: '',
+            date: '',
+            description: ''
+        })
+
     }
 
     dateHandler = (date) => {
@@ -50,7 +56,7 @@ class Form extends Component {
     }
 
     render() {
-        const { text } = this.state;
+        const { text, description } = this.state;
         return (
             <Container>
                 <Paper style={paperStyle}>
@@ -70,7 +76,7 @@ class Form extends Component {
                                 margin="normal"
                                 variant="outlined"
                                 onChange={this.onChange}
-                                defaultValue={text}
+                                value={text}
                                 type='title'
                                 name='text'
                             />
@@ -84,6 +90,7 @@ class Form extends Component {
                             margin="normal"
                             InputLabelProps={{ shrink: true, }}
                             variant="outlined"
+                            value={description}
                             onChange={this.onChange}
                             name='description'
                         />
