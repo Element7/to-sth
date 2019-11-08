@@ -1,6 +1,6 @@
-export const ADD_TASK = '[taskItem] add new task to the list';
-export const DELETE_TASK = '[id] delete task from list';
-export const COMPLETE_TASK = '[id] move the task to complete section';
+export const ADD_TASK = 'ADD_TASK';
+export const DELETE_TASK = 'DELETE_TASK';
+export const COMPLETE_TASK = 'COMPLETE_TASK';
 
 
 export const addTask = (taskItem) => ({
