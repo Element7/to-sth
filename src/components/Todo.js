@@ -23,6 +23,7 @@ const divStyle = {
 
 
 class Todo extends Component {
+
     handleClear = id => e => {
         this.props.deleteTask(id)
     }
@@ -44,6 +45,7 @@ class Todo extends Component {
                         key={item.id}
                         style={ListItemStyle}
                         divider
+
                     ><div style={divStyle}><span>{item.date.getMonth()}/{item.date.getDate()}/{item.date.getFullYear()}</span>
                             <span style={{ fontSize: '1.2rem', fontWeight: '500' }}>{item.taskTitle}</span></div>{this.renderBtns(item.id)}
                     </ListItem>

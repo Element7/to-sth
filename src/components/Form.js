@@ -26,30 +26,57 @@ class Form extends Component {
             text: '',
             date: '',
             description: '',
-            textValid: false,
-            dateValid: false
+            validForm: '',
+            titleError: ''
         }
     }
 
     onChange = (e) => {
         const { name, value } = e.target
-        this.setState({ [name]: value });
+        this.setState({
+            [name]: value,
+        });
 
     }
 
+    validate = () => {
+
+        if (!this.state.text || !this.state.date) {
+            this.setState({
+                titleError: 'Please provide title and pick date',
+                validForm: false
+            })
+            return false
+        } else {
+            this.setState({
+                titleError: '',
+                validForm: true
+            })
+            return true
+        }
+
+    }
+
+
+
     onSubmit = (e) => {
         e.preventDefault();
-        const textItem = {
-            text: this.state.text,
-            date: this.state.date,
-            description: this.state.description,
-        };
-        this.props.addTask(textItem);
-        this.setState({
-            text: '',
-            date: '',
-            description: ''
-        })
+        if (this.validate()) {
+            const textItem = {
+                text: this.state.text,
+                date: this.state.date,
+                description: this.state.description,
+            };
+            this.props.addTask(textItem);
+            this.setState({
+                text: '',
+                date: '',
+                description: ''
+            })
+
+        } else {
+            return
+        }
 
     }
 
@@ -84,6 +111,7 @@ class Form extends Component {
                             />
                             <Calendar date={this.dateHandler} />
                         </div>
+                        <div style={{ color: "red" }}>{this.state.titleError}</div>
                         <TextField
                             id="outlined-full-width"
                             label="Description"
