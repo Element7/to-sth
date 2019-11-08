@@ -23,9 +23,10 @@ class Done extends Component {
     renderList = () => {
         return (
             this.props.list.map(item => {
+                const { id, taskTitle } = item
                 return (
-                    <ListItem key={item.id} style={ListItemStyle}>
-                        <div><CheckIcon color='inherit' />{item.taskTitle}</div><div>{this.getDate()}</div>
+                    <ListItem key={id} style={ListItemStyle}>
+                        <div><CheckIcon color='inherit' />{taskTitle}</div><div>{this.getDate()}</div>
                     </ListItem>
                 )
             })
@@ -33,8 +34,6 @@ class Done extends Component {
     }
 
     render() {
-        console.log(this.props.list);
-
         return (
             <Container style={{ flexGrow: '10', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Paper style={{ width: '60%', marginBottom: '100px' }}>

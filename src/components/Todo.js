@@ -13,7 +13,6 @@ const ListItemStyle = {
     position: 'relative',
     marginTop: '10px',
     fontSize: '1.2rem'
-
 }
 
 const divStyle = {
@@ -21,11 +20,30 @@ const divStyle = {
     flexDirection: 'column'
 }
 
-
 class Todo extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            hover: false
+        }
+    }
 
     handleClear = id => e => {
         this.props.deleteTask(id)
+    }
+
+    toggleHover = () => {
+        this.setState({
+            hover: !this.state.hover
+        })
+    }
+
+    renderDescription = (description) => {
+        if (this.state.hover) {
+            return description
+        } else {
+            return
+        }
     }
 
     handleCompleteBtn = (id) => e => {
@@ -45,10 +63,24 @@ class Todo extends Component {
                         key={item.id}
                         style={ListItemStyle}
                         divider
-
-                    ><div style={divStyle}><span>{item.date.getMonth()}/{item.date.getDate()}/{item.date.getFullYear()}</span>
-                            <span style={{ fontSize: '1.2rem', fontWeight: '500' }}>{item.taskTitle}</span></div>{this.renderBtns(item.id)}
-                    </ListItem>
+                        onMouseEnter={this.toggleHover}
+                        onMouseLeave={this.toggleHover}>
+                        <div
+                            style={divStyle}>
+                            <span>
+                                {item.date.getMonth()}/{item.date.getDate()}/{item.date.getFullYear()}
+                            </span>
+                            <span
+                                style={{ fontSize: '1.2rem', fontWeight: '500' }}>
+                                {item.taskTitle}
+                            </span>
+                        </div>
+                        <div
+                            style={{ fontSize: '.9rem', fontStyle: 'italic' }}>
+                            {this.state.hover ? item.description : ''}
+                        </div>
+                        {this.renderBtns(item.id)}
+                    </ListItem >
                 )
             })
         )
@@ -67,7 +99,7 @@ class Todo extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        list: state.list.filter(ele => ele.status === STATUS.avaible),
+        list: state.list.filter(ele => ele.status === STATUS.available),
     }
 };
 

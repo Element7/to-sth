@@ -7,7 +7,6 @@ import {
 } from '@material-ui/pickers';
 
 function Calendar(props) {
-
     const [selectedDate, setSelectedDate] = React.useState(new Date());
     const handleDateChange = date => {
         setSelectedDate(date);
@@ -31,7 +30,5 @@ function Calendar(props) {
         </MuiPickersUtilsProvider>
     );
 }
-
-
 
 export default Calendar

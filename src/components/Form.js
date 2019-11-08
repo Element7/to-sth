@@ -16,7 +16,10 @@ const paperStyle = {
     paddingTop: '50px',
     paddingBottom: '1px',
     marginBottom: '50px'
+}
 
+const titleField = {
+    width: "48%"
 }
 
 class Form extends Component {
@@ -40,7 +43,6 @@ class Form extends Component {
     }
 
     validate = () => {
-
         if (!this.state.text || !this.state.date) {
             this.setState({
                 titleError: 'Please provide title and pick date',
@@ -54,10 +56,7 @@ class Form extends Component {
             })
             return true
         }
-
     }
-
-
 
     onSubmit = (e) => {
         e.preventDefault();
@@ -73,7 +72,6 @@ class Form extends Component {
                 date: '',
                 description: ''
             })
-
         } else {
             return
         }
@@ -85,7 +83,7 @@ class Form extends Component {
     }
 
     render() {
-        const { text, description } = this.state;
+        const { text, description, titleError } = this.state;
         return (
             <Container>
                 <Paper style={paperStyle}>
@@ -97,9 +95,9 @@ class Form extends Component {
                             alignItems: 'center',
                             width: '35rem',
                             marginTop: '30px',
-
                         }}>
                             <TextField
+                                style={titleField}
                                 label="Title"
                                 id="outlined-margin-dense"
                                 margin="normal"
@@ -109,9 +107,9 @@ class Form extends Component {
                                 type='title'
                                 name='text'
                             />
-                            <Calendar date={this.dateHandler} />
+                            <Calendar style={titleField} date={this.dateHandler} />
                         </div>
-                        <div style={{ color: "red" }}>{this.state.titleError}</div>
+                        <div style={{ color: "red" }}>{titleError}</div>
                         <TextField
                             id="outlined-full-width"
                             label="Description"

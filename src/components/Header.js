@@ -6,7 +6,6 @@ import {
 } from '@material-ui/core'
 
 
-
 const styles = () => ({
     root: {
         flexGrow: 1,
@@ -32,9 +31,9 @@ const styles = () => ({
 
 
 class Header extends Component {
-
-
     render() {
+        console.log(this.props);
+
         const classes = styles()
         return (<>
             <CssBaseline />
@@ -45,14 +44,14 @@ class Header extends Component {
                 </Toolbar>
             </AppBar>
             <Box>
-                <MenuList style={classes.menulist}>
+                <MenuList style={classes.menulist} >
                     <MenuItem component={NavLink} to='/'>
                         Add new task
                             </MenuItem>
-                    <MenuItem component={NavLink} to='/list'>
+                    <MenuItem component={NavLink} to='/list' >
                         Available tasks
                             </MenuItem>
-                    <MenuItem component={NavLink} to='/done'>
+                    <MenuItem component={NavLink} to='/done' >
                         Completed
                              </MenuItem>
                 </MenuList>
@@ -61,6 +60,5 @@ class Header extends Component {
         )
     }
 }
-
 
 export default Header
