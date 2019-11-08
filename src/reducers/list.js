@@ -1,38 +1,54 @@
-import { ADD_TASK, DELETE_TASK } from '../actions';
+import { ADD_TASK, DELETE_TASK, COMPLETE_TASK } from '../actions';
 
+export const STATUS = {
+    available: 1,
+    done: 2
+};
 
 const initState = [
     {
-        todo: 'eat',
-        id: new Date().getTime()
+        taskTitle: 'Learn',
+        id: new Date().getTime(),
+        date: new Date(),
+        description: 'You know nothing John S',
+        status: STATUS.available
     },
     {
-        todo: 'cleaning',
-        id: new Date().getTime() + 1
+        taskTitle: 'Keep learning',
+        id: new Date().getTime() + 1,
+        date: new Date(),
+        description: 'Try hard',
+        status: STATUS.available
     }
 ]
 
 
-
 export const list = (state = initState, action) => {
+    const copy = [...state];
+    const index = copy.findIndex(item => item.id === action.id);
     switch (action.type) {
         case ADD_TASK:
             return [
                 ...state,
                 {
-                    todo: action.text.task,
-                    id: new Date().getTime()
+                    taskTitle: action.taskItem.text,
+                    id: new Date().getTime(),
+                    date: action.taskItem.date,
+                    description: action.taskItem.description,
+                    status: STATUS.available
                 },
             ];
         case DELETE_TASK:
-            const copy = [...state];
-            const index = copy.findIndex(item => item.id === action.id);
             return [
                 ...copy.slice(0, index),
                 ...copy.slice(index + 1)
             ];
+        case COMPLETE_TASK:
+            copy[index].status = STATUS.done
+            return copy
         default:
             return state;
     }
 }
+
 

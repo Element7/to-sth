@@ -1,28 +1,57 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { deleteTask } from "../actions";
+import { deleteTask, completeTask } from "../actions";
 import ClearIcon from '@material-ui/icons/Clear';
 import { Container, List, ListItem, Button } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
-
+import Paper from '@material-ui/core/Paper';
+import { STATUS } from '../reducers/list'
 
 const ListItemStyle = {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    position: 'relative',
+    marginTop: '10px',
+    fontSize: '1.2rem'
 }
 
+const divStyle = {
+    display: 'flex',
+    flexDirection: 'column'
+}
 
 class Todo extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            hover: false
+        }
+    }
 
     handleClear = id => e => {
-        this.setState({
-            isFiltered: true
-        });
         this.props.deleteTask(id)
     }
 
+    toggleHover = () => {
+        this.setState({
+            hover: !this.state.hover
+        })
+    }
+
+    renderDescription = (description) => {
+        if (this.state.hover) {
+            return description
+        } else {
+            return
+        }
+    }
+
+    handleCompleteBtn = (id) => e => {
+        this.props.completeTask(id)
+    }
+
     renderBtns = id => <div>
-        <Button><CheckIcon /></Button>
+        <Button onClick={this.handleCompleteBtn(id)}><CheckIcon /></Button>
         <Button onClick={this.handleClear(id)}><ClearIcon /></Button>
     </div>
 
@@ -34,9 +63,24 @@ class Todo extends Component {
                         key={item.id}
                         style={ListItemStyle}
                         divider
-                    >
-                        {item.todo}{this.renderBtns(item.id)}
-                    </ListItem>
+                        onMouseEnter={this.toggleHover}
+                        onMouseLeave={this.toggleHover}>
+                        <div
+                            style={divStyle}>
+                            <span>
+                                {item.date.getMonth()}/{item.date.getDate()}/{item.date.getFullYear()}
+                            </span>
+                            <span
+                                style={{ fontSize: '1.2rem', fontWeight: '500' }}>
+                                {item.taskTitle}
+                            </span>
+                        </div>
+                        <div
+                            style={{ fontSize: '.9rem', fontStyle: 'italic' }}>
+                            {this.state.hover ? item.description : ''}
+                        </div>
+                        {this.renderBtns(item.id)}
+                    </ListItem >
                 )
             })
         )
@@ -45,7 +89,9 @@ class Todo extends Component {
     render() {
         return (
             <Container style={{ flexGrow: '10', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <List style={{ width: '40rem' }} >{this.renderList()}</List>
+                <Paper style={{ width: '60%', marginBottom: '100px' }}>
+                    <List style={{ padding: '0' }}>{this.renderList()}</List>
+                </Paper>
             </Container>
         )
     }
@@ -53,12 +99,13 @@ class Todo extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        list: state.list,
+        list: state.list.filter(ele => ele.status === STATUS.available),
     }
 };
 
 const mapDispatchToProps = {
-    deleteTask
+    deleteTask,
+    completeTask
 }
 
 export const list = connect(mapStateToProps, mapDispatchToProps)(Todo);
