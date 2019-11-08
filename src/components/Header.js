@@ -4,6 +4,7 @@ import {
     AppBar, Toolbar, Typography,
     CssBaseline, MenuList, MenuItem, Box
 } from '@material-ui/core'
+import { withRouter } from "react-router";
 
 
 const styles = () => ({
@@ -31,8 +32,9 @@ const styles = () => ({
 
 
 class Header extends Component {
+
     render() {
-        console.log(this.props);
+        const { location: { pathname } } = this.props
 
         const classes = styles()
         return (<>
@@ -45,13 +47,13 @@ class Header extends Component {
             </AppBar>
             <Box>
                 <MenuList style={classes.menulist} >
-                    <MenuItem component={NavLink} to='/'>
+                    <MenuItem component={NavLink} to='/' selected={'/' === pathname}>
                         Add new task
                             </MenuItem>
-                    <MenuItem component={NavLink} to='/list' >
+                    <MenuItem component={NavLink} to='/list' selected={'/list' === pathname}>
                         Available tasks
                             </MenuItem>
-                    <MenuItem component={NavLink} to='/done' >
+                    <MenuItem component={NavLink} to='/done' selected={'/done' === pathname}>
                         Completed
                              </MenuItem>
                 </MenuList>
@@ -61,4 +63,4 @@ class Header extends Component {
     }
 }
 
-export default Header
+export const Head = withRouter(Header)
