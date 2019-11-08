@@ -27,7 +27,7 @@ class Form extends Component {
         super(props);
         this.state = {
             text: '',
-            date: '',
+            date: new Date(),
             description: '',
             validForm: '',
             titleError: ''
@@ -72,10 +72,7 @@ class Form extends Component {
                 date: '',
                 description: ''
             })
-        } else {
-            return
-        }
-
+        } return
     }
 
     dateHandler = (date) => {
