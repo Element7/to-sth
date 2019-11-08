@@ -25,7 +25,9 @@ class Form extends Component {
         this.state = {
             text: '',
             date: '',
-            description: ''
+            description: '',
+            textValid: false,
+            dateValid: false
         }
     }
 

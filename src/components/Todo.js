@@ -5,12 +5,14 @@ import ClearIcon from '@material-ui/icons/Clear';
 import { Container, List, ListItem, Button } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
 import Paper from '@material-ui/core/Paper';
+import { STATUS } from '../reducers/list'
 
 const ListItemStyle = {
     display: 'flex',
     justifyContent: 'space-between',
     position: 'relative',
-    marginTop: '10px'
+    marginTop: '10px',
+    fontSize: '1.2rem'
 
 }
 
@@ -25,9 +27,7 @@ class Todo extends Component {
         this.props.deleteTask(id)
     }
 
-    handleCompleteBtn = id => e => {
-        console.log('asf');
-
+    handleCompleteBtn = (id) => e => {
         this.props.completeTask(id)
     }
 
@@ -65,7 +65,7 @@ class Todo extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        list: state.list,
+        list: state.list.filter(ele => ele.status === STATUS.avaible),
     }
 };
 

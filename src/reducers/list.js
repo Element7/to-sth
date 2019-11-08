@@ -1,19 +1,27 @@
 import { ADD_TASK, DELETE_TASK, COMPLETE_TASK } from '../actions';
 
+export const STATUS = {
+    avaible: 1,
+    done: 2
+};
+
 const initState = [
     {
         taskTitle: 'Learn',
         id: new Date().getTime(),
         date: new Date(),
-        description: 'You know nothing John S'
+        description: 'You know nothing John S',
+        status: STATUS.avaible
     },
     {
         taskTitle: 'Keep learning',
         id: new Date().getTime() + 1,
         date: new Date(),
-        description: 'Try hard'
+        description: 'Try hard',
+        status: STATUS.avaible
     }
 ]
+
 
 export const list = (state = initState, action) => {
     switch (action.type) {
@@ -24,7 +32,8 @@ export const list = (state = initState, action) => {
                     taskTitle: action.taskItem.text,
                     id: new Date().getTime(),
                     date: action.taskItem.date,
-                    description: action.taskItem.description
+                    description: action.taskItem.description,
+                    status: STATUS.avaible
                 },
             ];
         case DELETE_TASK:
@@ -35,9 +44,13 @@ export const list = (state = initState, action) => {
                 ...copy.slice(index + 1)
             ];
         case COMPLETE_TASK:
-            return state
+            const copyy = [...state];
+            const indexx = copyy.findIndex(item => item.id === action.id);
+            copyy[indexx].status = STATUS.done
+            return copyy
         default:
             return state;
     }
 }
+
 
