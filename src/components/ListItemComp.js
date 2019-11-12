@@ -19,19 +19,18 @@ const divStyle = {
   display: 'flex',
   flexDirection: 'column'
 }
-function ListItemComp({ taskTitle, date, description, status, id }) {
+function ListItemComp({ taskTitle, date, description, status, id, completeTask, deleteTask }) {
 
   const [hover, setHover] = useState(false)
 
   const handleClear = id => e => {
-    this.props.deleteTask(id)
+    deleteTask(id)
   }
 
   const handleCompleteBtn = (id) => e => {
-    console.log(id);
-
-    this.props.completeTask(id)
+    completeTask(id)
   }
+
   const renderBtns = id => <div>
     <Button onClick={handleCompleteBtn(id)}><CheckIcon /></Button>
     <Button onClick={handleClear(id)}><ClearIcon /></Button>

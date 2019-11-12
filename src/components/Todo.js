@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from "react-redux";
 import { deleteTask, completeTask } from "../actions";
 import { Container, List } from '@material-ui/core';
@@ -8,19 +8,11 @@ import ListItems from './ListItemComp'
 
 
 
-class Todo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hover: false
-    }
-  }
+function Todo({ list }) {
 
-
-
-  renderList = () => {
+  const renderList = () => {
     return (
-      this.props.list.map(item => {
+      list.map(item => {
         const { taskTitle, date, description, id, status } = item
         console.log(item);
 
@@ -31,18 +23,17 @@ class Todo extends Component {
     )
   }
 
-  render() {
-    return (
-      <Container style={{ flexGrow: '10', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Paper style={{ width: '60%', marginBottom: '100px' }}>
-          <List style={{ padding: '0' }}>
-            {this.renderList()}
-          </List>
-        </Paper>
-      </Container>
-    )
-  }
+  return (
+    <Container style={{ flexGrow: '10', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Paper style={{ width: '60%', marginBottom: '100px' }}>
+        <List style={{ padding: '0' }}>
+          {renderList(list)}
+        </List>
+      </Paper>
+    </Container>
+  )
 }
+
 
 const mapStateToProps = (state) => {
   return {
