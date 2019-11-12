@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { ListItem } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
@@ -6,6 +6,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import { connect } from "react-redux";
 import { STATUS } from '../reducers/list';
 import { deleteTask, completeTask } from "../actions";
+
 const ListItemStyle = {
   display: 'flex',
   justifyContent: 'space-between',
@@ -18,62 +19,50 @@ const divStyle = {
   display: 'flex',
   flexDirection: 'column'
 }
-class ListItemComp extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      hover: false
-    }
-  }
+function ListItemComp({ taskTitle, date, description, status, id }) {
 
-  toggleHover = () => {
-    this.setState({
-      hover: !this.state.hover
-    })
-  }
+  const [hover, setHover] = useState(false)
 
-  handleClear = id => e => {
+  const handleClear = id => e => {
     this.props.deleteTask(id)
   }
-  handleCompleteBtn = (id) => e => {
+
+  const handleCompleteBtn = (id) => e => {
     console.log(id);
 
     this.props.completeTask(id)
   }
-  renderBtns = id => <div>
-    <Button onClick={this.handleCompleteBtn(id)}><CheckIcon /></Button>
-    <Button onClick={this.handleClear(id)}><ClearIcon /></Button>
+  const renderBtns = id => <div>
+    <Button onClick={handleCompleteBtn(id)}><CheckIcon /></Button>
+    <Button onClick={handleClear(id)}><ClearIcon /></Button>
   </div>
 
 
+  return (
+    <ListItem
+      style={ListItemStyle}
+      divider
+      onMouseEnter={() => setHover(!hover)}
+      onMouseLeave={() => setHover(!hover)}>
 
-
-  render() {
-    return (
-      <ListItem
-        style={ListItemStyle}
-        divider
-        onMouseEnter={this.toggleHover}
-        onMouseLeave={this.toggleHover}>
-
-        <div
-          style={divStyle}>
-          <span>
-            {this.props.date.getMonth()}/{this.props.date.getDate()}/{this.props.date.getFullYear()}
-          </span>
-          <span
-            style={{ fontSize: '1.2rem', fontWeight: '500' }}>
-            {this.props.taskTitle}
-          </span>
-        </div>
-        <div
-          style={{ fontSize: '.9rem', fontStyle: 'italic' }}>
-          {this.state.hover ? this.props.description : ''}
-        </div>
-        {this.renderBtns(this.props.id)}</ListItem>
-    )
-  }
+      <div
+        style={divStyle}>
+        <span>
+          {date.getMonth()}/{date.getDate()}/{date.getFullYear()}
+        </span>
+        <span
+          style={{ fontSize: '1.2rem', fontWeight: '500' }}>
+          {taskTitle}
+        </span>
+      </div>
+      <div
+        style={{ fontSize: '.9rem', fontStyle: 'italic' }}>
+        {hover ? description : ''}
+      </div>
+      {renderBtns(id)}</ListItem>
+  )
 }
+
 
 const mapStateToProps = (state) => {
   return {
