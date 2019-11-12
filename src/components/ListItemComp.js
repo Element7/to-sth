@@ -19,7 +19,7 @@ const divStyle = {
   display: 'flex',
   flexDirection: 'column'
 }
-function ListItemComp({ taskTitle, date, description, status, id, completeTask, deleteTask }) {
+function ListItemComp({ taskTitle, date, description, id, completeTask, deleteTask }) {
 
   const [hover, setHover] = useState(false)
 

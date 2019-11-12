@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import React, { Component } from 'react'
+import React from 'react'
 import {
   AppBar, Toolbar, Typography,
   CssBaseline, MenuList, MenuItem, Box
@@ -31,36 +31,34 @@ const styles = () => ({
 })
 
 
-class Header extends Component {
+function Header(props) {
 
-  render() {
-    const { location: { pathname } } = this.props
+  const { location: { pathname } } = props
+  const classes = styles()
 
-    const classes = styles()
-    return (<>
-      <CssBaseline />
-      <AppBar position="static">
-        <Toolbar >
-          <Typography style={classes.fullWidth} variant="h6" align='center' color="inherit" noWrap> Your To-Do App
-                        </Typography>
-        </Toolbar>
-      </AppBar>
-      <Box>
-        <MenuList style={classes.menulist} >
-          <MenuItem component={NavLink} to='/' selected={'/' === pathname}>
-            Add new task
-                            </MenuItem>
-          <MenuItem component={NavLink} to='/list' selected={'/list' === pathname}>
-            Available tasks
-                            </MenuItem>
-          <MenuItem component={NavLink} to='/done' selected={'/done' === pathname}>
-            Completed
-                             </MenuItem>
-        </MenuList>
-      </Box>
-    </ >
-    )
-  }
+  return (<>
+    <CssBaseline />
+    <AppBar position="static">
+      <Toolbar >
+        <Typography style={classes.fullWidth} variant="h6" align='center' color="inherit" noWrap> Your To-Do App</Typography>
+      </Toolbar>
+    </AppBar>
+    <Box>
+      <MenuList style={classes.menulist} >
+        <MenuItem component={NavLink} to='/' selected={'/' === pathname}>
+          Add new task
+        </MenuItem>
+        <MenuItem component={NavLink} to='/list' selected={'/list' === pathname}>
+          Available tasks
+        </MenuItem>
+        <MenuItem component={NavLink} to='/done' selected={'/done' === pathname}>
+          Completed
+        </MenuItem>
+      </MenuList>
+    </Box>
+  </ >
+  )
 }
+
 
 export const Head = withRouter(Header)
