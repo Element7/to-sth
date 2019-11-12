@@ -6,53 +6,54 @@ import { Container, List, ListItem, Paper } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
 
 const ListItemStyle = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    position: 'relative',
-    marginTop: '10px',
-    color: 'green',
-    fontWeight: '500'
+  display: 'flex',
+  justifyContent: 'space-between',
+  position: 'relative',
+  marginTop: '10px',
+  color: 'green',
+  fontWeight: '500'
 
 }
 class Done extends Component {
-    getDate = () => {
-        const date = new Date()
-        return (date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear())
-    }
+  getDate = () => {
+    const date = new Date()
+    return (date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear())
+  }
 
-    renderList = () => {
+  renderList = () => {
+    return (
+      this.props.list.map(item => {
+        const { id, taskTitle } = item
         return (
-            this.props.list.map(item => {
-                const { id, taskTitle } = item
-                return (
-                    <ListItem key={id} style={ListItemStyle}>
-                        <div><CheckIcon color='inherit' />{taskTitle}</div><div>{this.getDate()}</div>
-                    </ListItem>
-                )
-            })
+          <ListItem key={id} style={ListItemStyle}>
+            <div><CheckIcon color='inherit' />{taskTitle}</div><div>{this.getDate()}</div>
+          </ListItem>
         )
-    }
+      })
+    )
+  }
 
-    render() {
-        return (
-            <Container style={{ flexGrow: '10', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Paper style={{ width: '60%', marginBottom: '100px' }}>
-                    <List style={{ padding: '0' }}>{this.renderList()}</List>
-                </Paper>
-            </Container>
-        )
-    }
+  render() {
+    return (
+      <Container style={{ flexGrow: '10', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Paper style={{ width: '60%', marginBottom: '100px' }}>
+          <List style={{ padding: '0' }}>{this.renderList()}</List>
+        </Paper>
+      </Container>
+    )
+  }
 }
 
 const mapStateToProps = (state) => {
-    return {
-        list: state.list.filter(ele => ele.status === STATUS.done),
-    }
+  return {
+    list: state.list.filter(ele => ele.status === STATUS.done),
+  }
 };
 
 const mapDispatchToProps = {
-    deleteTask,
-    completeTask
+  deleteTask,
+  completeTask
 }
 
-export const doneList = connect(mapStateToProps, mapDispatchToProps)(Done);
+const DoneList = connect(mapStateToProps, mapDispatchToProps)(Done);
+export default DoneList
