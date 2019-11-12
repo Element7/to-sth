@@ -11,9 +11,12 @@ const ListItemStyle = {
   position: 'relative',
   marginTop: '10px',
   color: 'green',
-  fontWeight: '500'
-
+  fontWeight: '500',
+  fontSize: '1.2rem'
 }
+// const divStyle = {
+//   position: 'relative'
+// }
 class Done extends Component {
   getDate = () => {
     const date = new Date()
@@ -26,7 +29,7 @@ class Done extends Component {
         const { id, taskTitle } = item
         return (
           <ListItem key={id} style={ListItemStyle}>
-            <div><CheckIcon color='inherit' />{taskTitle}</div><div>{this.getDate()}</div>
+            <div><CheckIcon color='inherit' style={{ position: 'absolute', top: '10px' }} /><span style={{ marginLeft: '30px' }}>{taskTitle}</span></div><div>{this.getDate()}</div>
           </ListItem>
         )
       })
