@@ -26,8 +26,12 @@ const initState = [
 export const list = (state = initState, action) => {
     const copy = [...state];
     const index = copy.findIndex(item => item.id === action.id);
+
     switch (action.type) {
+
+
         case ADD_TASK:
+
             return [
                 ...state,
                 {

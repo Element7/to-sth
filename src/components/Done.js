@@ -55,4 +55,5 @@ const mapDispatchToProps = {
     completeTask
 }
 
-export const doneList = connect(mapStateToProps, mapDispatchToProps)(Done);
+const DoneList = connect(mapStateToProps, mapDispatchToProps)(Done);
+export default DoneList

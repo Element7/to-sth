@@ -43,7 +43,7 @@ class Form extends Component {
     }
 
     validate = () => {
-        if (!this.state.text || !this.state.date) {
+        if (!this.state.text) {
             this.setState({
                 titleError: 'Please provide title and pick date',
                 validForm: false
@@ -61,18 +61,18 @@ class Form extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         if (this.validate()) {
-            const textItem = {
+            const taskItem = {
                 text: this.state.text,
                 date: this.state.date,
                 description: this.state.description,
             };
-            this.props.addTask(textItem);
+            this.props.addTask(taskItem);
             this.setState({
                 text: '',
                 date: '',
                 description: ''
             })
-        } return
+        }
     }
 
     dateHandler = (date) => {
@@ -98,6 +98,7 @@ class Form extends Component {
                                 label="Title"
                                 id="outlined-margin-dense"
                                 margin="normal"
+                                placeholder="Please provide description"
                                 variant="outlined"
                                 onChange={this.onChange}
                                 value={text}
@@ -111,7 +112,7 @@ class Form extends Component {
                             id="outlined-full-width"
                             label="Description"
                             style={{ margin: 8, width: '35rem' }}
-                            placeholder="Type text description"
+                            placeholder="Please provide description"
                             margin="normal"
                             InputLabelProps={{ shrink: true, }}
                             variant="outlined"

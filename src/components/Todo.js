@@ -108,6 +108,6 @@ const mapDispatchToProps = {
     completeTask
 }
 
-export const list = connect(mapStateToProps, mapDispatchToProps)(Todo);
+const Lista = connect(mapStateToProps, mapDispatchToProps)(Todo);
 
-
+export default Lista
