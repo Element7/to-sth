@@ -9,63 +9,50 @@ import ListItems from './ListItemComp'
 
 
 class Todo extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            hover: false
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+      hover: false
     }
+  }
 
 
 
+  renderList = () => {
+    return (
+      this.props.list.map(item => {
+        const { taskTitle, date, description, id, status } = item
+        console.log(item);
 
-    // renderDescription = (description) => {
-    //     if (this.state.hover) {
-    //         return description
-    //     } else {
-    //         return
-    //     }
-    // }
-
-
-
-
-
-    // renderList = () => {
-    //     return (
-    //         this.props.list.map(item => {
-    //             return (
-
-    //                 <ListItems key={item.id} props={item} />
-
-
-    //             )
-    //         })
-    //     )
-    // }
-
-    render() {
         return (
-            <Container style={{ flexGrow: '10', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Paper style={{ width: '60%', marginBottom: '100px' }}>
-                    <List style={{ padding: '0' }}>
-                        <ListItems />
-                    </List>
-                </Paper>
-            </Container>
+          <ListItems key={id} taskTitle={taskTitle} date={date} description={description} status={status} id={id} />
         )
-    }
+      })
+    )
+  }
+
+  render() {
+    return (
+      <Container style={{ flexGrow: '10', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Paper style={{ width: '60%', marginBottom: '100px' }}>
+          <List style={{ padding: '0' }}>
+            {this.renderList()}
+          </List>
+        </Paper>
+      </Container>
+    )
+  }
 }
 
 const mapStateToProps = (state) => {
-    return {
-        list: state.list.filter(ele => ele.status === STATUS.available),
-    }
+  return {
+    list: state.list.filter(ele => ele.status === STATUS.available),
+  }
 };
 
 const mapDispatchToProps = {
-    deleteTask,
-    completeTask
+  deleteTask,
+  completeTask
 }
 
 const Lista = connect(mapStateToProps, mapDispatchToProps)(Todo);

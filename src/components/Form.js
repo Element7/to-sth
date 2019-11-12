@@ -5,136 +5,136 @@ import { Button, Typography, TextField, Container, FormControl, Paper } from '@m
 import Calendar from './Calendar';
 
 const formStyle = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'columns',
-    marginBottom: '50px'
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'columns',
+  marginBottom: '50px'
 }
 
 const paperStyle = {
-    paddingTop: '50px',
-    paddingBottom: '1px',
-    marginBottom: '50px'
+  paddingTop: '50px',
+  paddingBottom: '1px',
+  marginBottom: '50px'
 }
 
 const titleField = {
-    width: "48%"
+  width: "48%"
 }
 
 class Form extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            text: '',
-            date: new Date(),
-            description: '',
-            validForm: '',
-            titleError: ''
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: '',
+      date: new Date(),
+      description: '',
+      validForm: '',
+      titleError: ''
     }
+  }
 
-    onChange = (e) => {
-        const { name, value } = e.target
-        this.setState({
-            [name]: value,
-        });
+  onChange = (e) => {
+    const { name, value } = e.target
+    this.setState({
+      [name]: value,
+    });
 
+  }
+
+  validate = () => {
+    if (!this.state.text) {
+      this.setState({
+        titleError: 'Please provide title and pick date',
+        validForm: false
+      })
+      return false
+    } else {
+      this.setState({
+        titleError: '',
+        validForm: true
+      })
+      return true
     }
+  }
 
-    validate = () => {
-        if (!this.state.text) {
-            this.setState({
-                titleError: 'Please provide title and pick date',
-                validForm: false
-            })
-            return false
-        } else {
-            this.setState({
-                titleError: '',
-                validForm: true
-            })
-            return true
-        }
+  onSubmit = (e) => {
+    e.preventDefault();
+    if (this.validate()) {
+      const taskItem = {
+        text: this.state.text,
+        date: this.state.date,
+        description: this.state.description,
+      };
+      this.props.addTask(taskItem);
+      this.setState({
+        text: '',
+        date: '',
+        description: ''
+      })
     }
+  }
 
-    onSubmit = (e) => {
-        e.preventDefault();
-        if (this.validate()) {
-            const taskItem = {
-                text: this.state.text,
-                date: this.state.date,
-                description: this.state.description,
-            };
-            this.props.addTask(taskItem);
-            this.setState({
-                text: '',
-                date: '',
-                description: ''
-            })
-        }
-    }
+  dateHandler = (date) => {
+    this.setState({ date: date });
+  }
 
-    dateHandler = (date) => {
-        this.setState({ date: date });
-    }
-
-    render() {
-        const { text, description, titleError } = this.state;
-        return (
-            <Container>
-                <Paper style={paperStyle}>
-                    <FormControl style={formStyle} >
-                        <Typography variant='h5'>Create new task</Typography>
-                        <div style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            width: '35rem',
-                            marginTop: '30px',
-                        }}>
-                            <TextField
-                                style={titleField}
-                                label="Title"
-                                id="outlined-margin-dense"
-                                margin="normal"
-                                placeholder="Please provide description"
-                                variant="outlined"
-                                onChange={this.onChange}
-                                value={text}
-                                type='title'
-                                name='text'
-                            />
-                            <Calendar style={titleField} date={this.dateHandler} />
-                        </div>
-                        <div style={{ color: "red" }}>{titleError}</div>
-                        <TextField
-                            id="outlined-full-width"
-                            label="Description"
-                            style={{ margin: 8, width: '35rem' }}
-                            placeholder="Please provide description"
-                            margin="normal"
-                            InputLabelProps={{ shrink: true, }}
-                            variant="outlined"
-                            value={description}
-                            onChange={this.onChange}
-                            name='description'
-                        />
-                        <br />
-                        <Button onClick={this.onSubmit} color='primary' variant='contained' size='large' style={{ marginTop: '20px' }}>Submit</Button>
-                    </FormControl>
-                </Paper>
-            </ Container >
-        )
-    }
+  render() {
+    const { text, description, titleError } = this.state;
+    return (
+      <Container>
+        <Paper style={paperStyle}>
+          <FormControl style={formStyle} >
+            <Typography variant='h5'>Create new task</Typography>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              width: '35rem',
+              marginTop: '30px',
+            }}>
+              <TextField
+                style={titleField}
+                label="Title"
+                id="outlined-margin-dense"
+                margin="normal"
+                placeholder="Please provide description"
+                variant="outlined"
+                onChange={this.onChange}
+                value={text}
+                type='title'
+                name='text'
+              />
+              <Calendar style={titleField} date={this.dateHandler} />
+            </div>
+            <div style={{ color: "red" }}>{titleError}</div>
+            <TextField
+              id="outlined-full-width"
+              label="Description"
+              style={{ margin: 8, width: '35rem' }}
+              placeholder="Please provide description"
+              margin="normal"
+              InputLabelProps={{ shrink: true, }}
+              variant="outlined"
+              value={description}
+              onChange={this.onChange}
+              name='description'
+            />
+            <br />
+            <Button onClick={this.onSubmit} color='primary' variant='contained' size='large' style={{ marginTop: '20px' }}>Submit</Button>
+          </FormControl>
+        </Paper>
+      </ Container >
+    )
+  }
 }
 
 const mapStateToProps = ({ list }) => ({
-    list
+  list
 });
 
 const mapDispatchToProps = {
-    addTask
+  addTask
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
