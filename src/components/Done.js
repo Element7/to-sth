@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { STATUS } from '../reducers/list';
 import { connect } from "react-redux";
 import { deleteTask, completeTask } from "../actions";
@@ -14,38 +14,36 @@ const ListItemStyle = {
   fontWeight: '500',
   fontSize: '1.2rem'
 }
-// const divStyle = {
-//   position: 'relative'
-// }
-class Done extends Component {
-  getDate = () => {
+
+function Done({list}) {
+  const getDate = () => {
     const date = new Date()
     return (date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear())
   }
 
-  renderList = () => {
+  const renderList = () => {
     return (
-      this.props.list.map(item => {
+      list.map(item => {
         const { id, taskTitle } = item
         return (
           <ListItem key={id} style={ListItemStyle}>
-            <div><CheckIcon color='inherit' style={{ position: 'absolute', top: '10px' }} /><span style={{ marginLeft: '30px' }}>{taskTitle}</span></div><div>{this.getDate()}</div>
+            <div><CheckIcon color='inherit' style={{ position: 'absolute', top: '10px' }} /><span style={{ marginLeft: '30px' }}>{taskTitle}</span></div><div>{getDate()}</div>
           </ListItem>
         )
       })
     )
   }
 
-  render() {
-    return (
-      <Container style={{ flexGrow: '10', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Paper style={{ width: '60%', marginBottom: '100px' }}>
-          <List style={{ padding: '0' }}>{this.renderList()}</List>
-        </Paper>
-      </Container>
-    )
-  }
+
+  return (
+    <Container style={{ flexGrow: '10', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Paper style={{ width: '60%', marginBottom: '100px' }}>
+        <List style={{ padding: '0' }}>{renderList()}</List>
+      </Paper>
+    </Container>
+  )
 }
+
 
 const mapStateToProps = (state) => {
   return {

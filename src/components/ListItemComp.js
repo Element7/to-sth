@@ -23,17 +23,17 @@ function ListItemComp({ taskTitle, date, description, id, completeTask, deleteTa
 
   const [hover, setHover] = useState(false)
 
-  const handleClear = id => e => {
+  const handleClear = (id) => {
     deleteTask(id)
   }
 
-  const handleCompleteBtn = (id) => e => {
+  const handleCompleteBtn = (id) => {
     completeTask(id)
   }
 
   const renderBtns = id => <div>
-    <Button onClick={handleCompleteBtn(id)}><CheckIcon /></Button>
-    <Button onClick={handleClear(id)}><ClearIcon /></Button>
+    <Button onClick={e => handleCompleteBtn(id)}><CheckIcon /></Button>
+    <Button onClick={e => handleClear(id)}><ClearIcon /></Button>
   </div>
 
 

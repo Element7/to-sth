@@ -14,8 +14,6 @@ function Todo({ list }) {
     return (
       list.map(item => {
         const { taskTitle, date, description, id, status } = item
-        console.log(item);
-
         return (
           <ListItems key={id} taskTitle={taskTitle} date={date} description={description} status={status} id={id} />
         )
