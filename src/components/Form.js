@@ -4,6 +4,7 @@ import { addTask } from '../actions';
 import { Button, Typography, TextField, Container, FormControl, Paper } from '@material-ui/core';
 import Calendar from './Calendar';
 
+
 const formStyle = {
   display: 'flex',
   justifyContent: 'center',
@@ -23,6 +24,7 @@ const titleField = {
 }
 
 function Form({ addTask }) {
+
 
   const [text, setTitle] = useState('')
   const [date, setDate] = useState(new Date())
